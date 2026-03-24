@@ -642,17 +642,21 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
       <strong>Proyectos desde 300.000€</strong>
       <p>Es donde nuestra metodología aporta valor real. Si tu proyecto está en ese rango o por encima, queremos conocerlo.</p>
     </div>
-    <form onsubmit="enviar(event)">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="c76ae81c-ce09-4e1b-9e87-914fd9747fcb">
+      <input type="hidden" name="redirect" value="https://davidseguiarquitectos.com/gracias/">
+      <input type="hidden" name="subject" value="Nueva solicitud de reunión — David Seguí Arquitectos">
+      <input type="checkbox" name="botcheck" style="display:none">
       <div class="campos-fila">
-        <div class="campo"><label>Nombre</label><input type="text" placeholder="Tu nombre" required></div>
-        <div class="campo"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+34 6XX XXX XXX" required></div>
+        <div class="campo"><label>Nombre</label><input type="text" name="nombre" placeholder="Tu nombre" required></div>
+        <div class="campo"><label>Teléfono / WhatsApp</label><input type="tel" name="telefono" placeholder="+34 6XX XXX XXX" required></div>
       </div>
       <div class="campo"><label>Municipio del inmueble</label>
-        <select><option value="">Seleccionar</option><option>Altea</option><option>Calpe</option><option>Moraira</option><option>Alfaz del Pi</option><option>Benidorm</option><option>Dénia</option><option>Otro municipio de la Costa Blanca</option></select>
+        <select name="municipio"><option value="">Seleccionar</option><option>Altea</option><option>Calpe</option><option>Moraira</option><option>Alfaz del Pi</option><option>Benidorm</option><option>Dénia</option><option>Otro municipio de la Costa Blanca</option></select>
       </div>
-      <div class="campo"><label>Cuéntanos brevemente el proyecto</label><textarea rows="4" placeholder="Tipo de inmueble, qué quieres hacer, cuándo te gustaría empezar…"></textarea></div>
+      <div class="campo"><label>Cuéntanos brevemente el proyecto</label><textarea name="proyecto" rows="4" placeholder="Tipo de inmueble, qué quieres hacer, cuándo te gustaría empezar…"></textarea></div>
       <div class="campo"><label>Presupuesto estimado</label>
-        <select><option value="">Seleccionar rango</option><option>Entre 300.000€ y 400.000€</option><option>Entre 400.000€ y 500.000€</option><option>Más de 500.000€</option><option>Sin definir — necesito orientación</option></select>
+        <select name="presupuesto"><option value="">Seleccionar rango</option><option>Entre 300.000€ y 400.000€</option><option>Entre 400.000€ y 500.000€</option><option>Más de 500.000€</option><option>Sin definir — necesito orientación</option></select>
       </div>
       <button type="submit" class="btn-enviar">Solicitar reunión inicial →</button>
       <p class="form-legal">Al enviar aceptas nuestra <a href="#">política de privacidad</a>. No compartimos tus datos.</p>
@@ -709,6 +713,3 @@ function faq(btn) {
   document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
   if (!open) item.classList.add('open');
 }
-
-// FORM
-function enviar(
