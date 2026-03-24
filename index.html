@@ -25,472 +25,508 @@
 html { scroll-behavior: smooth; }
 body { font-family: var(--sans); background: var(--white); color: var(--black); font-size: 18px; line-height: 1.7; overflow-x: hidden; }
 
-/* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 6%; height: 68px; background: rgba(250,250,250,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--g10); }
-.nav-logo img { height: 36px; display: block; }
-.nav-cta { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: var(--black); padding: 12px 24px; text-decoration: none; transition: opacity 0.2s; }
-.nav-cta:hover { opacity: 0.72; }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%; height: 72px;
+  background: transparent;
+  transition: background 0.4s, border-color 0.4s;
+}
+nav.scrolled {
+  background: rgba(250,250,250,0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--g10);
+}
+nav.scrolled .nav-logo img { filter: none; }
+.nav-logo img { height: 36px; display: block; filter: brightness(0) invert(1); transition: filter 0.4s; }
+.nav-cta {
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--black); background: var(--white);
+  padding: 12px 24px; text-decoration: none; transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.75; }
 
-/* PARALLAX BASE — SIN FILTROS */
+/* ── PARALLAX BASE ── */
 .parallax-wrap { position: relative; overflow: hidden; }
-.parallax-img { position: absolute; inset: -20% 0; width: 100%; height: 140%; object-fit: cover; will-change: transform; filter: none !important; }
+.parallax-img {
+  position: absolute; inset: -20% 0;
+  width: 100%; height: 140%;
+  object-fit: cover;
+  will-change: transform;
+  filter: none;
+}
 
-/* HERO */
-.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 68px; }
-.hero-content { display: flex; flex-direction: column; justify-content: center; padding: 8% 7% 8% 8%; border-right: 1px solid var(--g10); background: var(--white); position: relative; z-index: 1; }
-.eyebrow { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--g40); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 14px; }
-.eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--g20); }
-h1 { font-size: clamp(2.8rem, 4.5vw, 5rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 2rem; }
-.hero-sub { font-size: 1.05rem; font-weight: 300; color: var(--g60); max-width: 420px; margin-bottom: 3rem; line-height: 1.85; }
-.hero-actions { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
-.btn-black { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: var(--black); padding: 16px 32px; text-decoration: none; display: inline-block; transition: opacity 0.2s; border: none; cursor: pointer; }
-.btn-black:hover { opacity: 0.72; }
-.btn-outline { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: transparent; padding: 15px 32px; border: 1px solid var(--g20); text-decoration: none; display: inline-block; transition: border-color 0.2s; }
-.btn-outline:hover { border-color: var(--black); }
-.hero-phone { font-size: 1rem; font-weight: 300; color: var(--g60); text-decoration: none; transition: color 0.2s; }
-.hero-phone:hover { color: var(--black); }
-.hero-right { display: grid; grid-template-rows: 1fr auto; overflow: hidden; }
-.hero-parallax { position: relative; overflow: hidden; min-height: 400px; }
-.hero-stats { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--g10); }
-.stat { padding: 1.4rem 1.6rem; border-right: 1px solid var(--g10); }
+/* ════════════════════════════════
+   HERO — PORTADA A PANTALLA COMPLETA
+════════════════════════════════ */
+.hero-cover {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-cover .parallax-img {
+  filter: brightness(0.55);
+}
+/* degradado sutil solo abajo para texto */
+.hero-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    transparent 30%,
+    rgba(0,0,0,0.65) 100%
+  );
+  pointer-events: none;
+}
+.hero-cover-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 8% 6%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.hero-eyebrow {
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 32px; height: 1px;
+  background: rgba(255,255,255,0.35);
+}
+.hero-cover h1 {
+  font-size: clamp(3rem, 7vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  margin-bottom: 2.5rem;
+  max-width: 900px;
+}
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.hero-sub {
+  font-size: 1rem; font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  max-width: 420px; line-height: 1.85;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.btn-white {
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--black); background: var(--white);
+  padding: 16px 32px; text-decoration: none; display: inline-block;
+  transition: opacity 0.2s; border: none; cursor: pointer;
+}
+.btn-white:hover { opacity: 0.82; }
+.btn-ghost {
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white); background: transparent;
+  padding: 15px 32px; border: 1px solid rgba(255,255,255,0.4);
+  text-decoration: none; display: inline-block;
+  transition: border-color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--white); }
+
+/* stats bar bajo el hero */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--g10);
+}
+.stat {
+  padding: 2rem 2.5rem;
+  border-right: 1px solid var(--g10);
+  display: flex; flex-direction: column; gap: 4px;
+}
 .stat:last-child { border-right: none; }
-.stat-num { font-size: 2rem; font-weight: 300; letter-spacing: -0.03em; line-height: 1; }
-.stat-label { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g40); margin-top: 4px; }
+.stat-num { font-size: 2.2rem; font-weight: 300; letter-spacing: -0.04em; line-height: 1; }
+.stat-label { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g40); }
 
-/* TRUST BAR */
+/* ── TRUST BAR ── */
 .trust-bar { background: var(--black); padding: 0 8%; display: flex; align-items: stretch; overflow-x: auto; }
-.trust-item { display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 1.4rem 2rem; border-right: 1px solid var(--g80); flex-shrink: 0; }
+.trust-item { display: flex; align-items: center; gap: 10px; white-space: nowrap; padding: 1.3rem 2rem; border-right: 1px solid var(--g80); flex-shrink: 0; }
 .trust-item:first-child { padding-left: 0; }
 .trust-item:last-child { border-right: none; }
 .trust-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--g60); flex-shrink: 0; }
 .trust-txt { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--g40); }
 
-/* SECTIONS */
+/* ── SECTIONS ── */
 section { padding: 7rem 8%; }
-.section-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--g40); display: flex; align-items: center; gap: 12px; margin-bottom: 1.8rem; }
+.section-label {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--g40); display: flex; align-items: center; gap: 12px; margin-bottom: 1.8rem;
+}
 .section-label::before { content: ''; width: 22px; height: 1px; background: var(--g20); }
 h2 { font-size: clamp(2.2rem, 3.5vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.025em; }
 
-/* ═══════════════════════════════════════════
-   PARALLAX BANNERS — EFECTO DRAMÁTICO
-═══════════════════════════════════════════ */
+/* ── BTN REUTILIZABLE ── */
+.btn-black {
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--white); background: var(--black);
+  padding: 16px 32px; text-decoration: none; display: inline-block;
+  transition: opacity 0.2s; border: none; cursor: pointer;
+}
+.btn-black:hover { opacity: 0.72; }
+.btn-outline {
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--black); background: transparent;
+  padding: 15px 32px; border: 1px solid var(--g20);
+  text-decoration: none; display: inline-block; transition: border-color 0.2s;
+}
+.btn-outline:hover { border-color: var(--black); }
 
-/* BANNER TIPO A — texto grande superpuesto con overlay degradado */
-.banner-a {
+/* ════════════════════════════════
+   FOTO SEPARADORA — una sola imagen con efecto
+════════════════════════════════ */
+
+/* Tipo FULL — imagen a todo ancho con texto flotante */
+.photo-full {
   position: relative;
   height: 80vh;
   overflow: hidden;
 }
-.banner-a .parallax-img {
-  filter: none;
+.photo-full .parallax-img { filter: brightness(0.62); }
+.photo-full-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg, rgba(0,0,0,0.6) 0%, transparent 55%);
 }
-.banner-a-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0,0,0,0.72) 0%,
-    rgba(0,0,0,0.2) 50%,
-    rgba(0,0,0,0.55) 100%
-  );
-}
-.banner-a-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+.photo-full-content {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
   padding: 5% 8% 6%;
 }
-.banner-a-tag {
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.photo-tag {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 10px;
 }
-.banner-a-tag::before { content: ''; width: 22px; height: 1px; background: rgba(255,255,255,0.35); }
-.banner-a-title {
-  font-size: clamp(3rem, 7vw, 7rem);
-  font-weight: 300;
-  line-height: 0.95;
+.photo-tag::before { content: ''; width: 20px; height: 1px; background: rgba(255,255,255,0.3); }
+.photo-full-title {
+  font-size: clamp(2.8rem, 6vw, 6.5rem);
+  font-weight: 300; line-height: 0.95;
   letter-spacing: -0.04em;
   color: var(--white);
-  margin-bottom: 2rem;
 }
-.banner-a-title em {
-  font-style: italic;
-  font-weight: 300;
-}
-.banner-a-sub {
-  font-size: 1.05rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.7);
-  max-width: 480px;
-  line-height: 1.8;
-  border-left: 2px solid rgba(255,255,255,0.25);
-  padding-left: 1.2rem;
-}
+.photo-full-title em { font-style: italic; }
 
-/* BANNER TIPO B — texto centrado, tipografía enorme, mix-blend */
-.banner-b {
-  position: relative;
-  height: 70vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.banner-b .parallax-img {
-  filter: brightness(0.6);
-}
-.banner-b-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 0 8%;
-}
-.banner-b-word {
-  display: block;
-  font-size: clamp(4rem, 10vw, 11rem);
-  font-weight: 300;
-  line-height: 0.88;
-  letter-spacing: -0.05em;
-  color: var(--white);
-  mix-blend-mode: overlay;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
-}
-.banner-b-word.visible { opacity: 1; transform: translateY(0); }
-.banner-b-word:nth-child(2) { transition-delay: 0.1s; }
-.banner-b-word:nth-child(3) { transition-delay: 0.2s; }
-.banner-b-caption {
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  margin-top: 2.5rem;
-  opacity: 0;
-  transition: opacity 0.9s ease 0.4s;
-}
-.banner-b-caption.visible { opacity: 1; }
-
-/* BANNER TIPO C — split: foto izq, texto dcha sobre color */
-.banner-c {
+/* Tipo OFFSET — imagen que ocupa 2/3, texto a un lado sobre negro */
+.photo-offset {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  min-height: 65vh;
+  grid-template-columns: 1.4fr 1fr;
+  min-height: 70vh;
 }
-.banner-c-img {
-  position: relative;
-  overflow: hidden;
+.photo-offset-img {
+  position: relative; overflow: hidden;
 }
-.banner-c-img .parallax-img { filter: none; }
-.banner-c-text {
+.photo-offset-img .parallax-img { filter: none; }
+.photo-offset-text {
   background: var(--black);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: flex; flex-direction: column; justify-content: center;
   padding: 6% 7%;
 }
-.banner-c-num {
-  font-size: clamp(5rem, 8vw, 9rem);
-  font-weight: 300;
-  line-height: 1;
+.photo-offset-num {
+  font-size: clamp(5rem, 8vw, 10rem);
+  font-weight: 300; line-height: 1;
   letter-spacing: -0.05em;
-  color: rgba(255,255,255,0.08);
-  margin-bottom: -1.5rem;
+  color: rgba(255,255,255,0.06);
+  margin-bottom: -2rem;
 }
-.banner-c-title {
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 300;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--white);
+.photo-offset-title {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 300; line-height: 1.15;
+  letter-spacing: -0.02em; color: var(--white);
   margin-bottom: 1.5rem;
 }
-.banner-c-desc {
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--g40);
-  line-height: 1.9;
-  max-width: 360px;
+.photo-offset-desc {
+  font-size: 1rem; font-weight: 300;
+  color: var(--g40); line-height: 1.9; max-width: 340px;
 }
-.banner-c-tag {
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--g60);
-  margin-bottom: 3rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.photo-offset-tag {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--g60); margin-bottom: 3rem;
+  display: flex; align-items: center; gap: 10px;
 }
-.banner-c-tag::before { content: ''; width: 20px; height: 1px; background: var(--g80); }
+.photo-offset-tag::before { content: ''; width: 18px; height: 1px; background: var(--g80); }
 
-/* BANNER TIPO D — imagen full + texto en esquina con caja */
-.banner-d {
+/* Tipo CINEMATIC — imagen altísima con texto centrado animado */
+.photo-cinematic {
   position: relative;
   height: 75vh;
   overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
 }
-.banner-d .parallax-img { filter: brightness(0.65); }
-.banner-d-content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 8%;
+.photo-cinematic .parallax-img { filter: brightness(0.5); }
+.photo-cinematic-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 0 8%;
 }
-.banner-d-box {
-  background: rgba(250,250,250,0.94);
-  backdrop-filter: blur(12px);
-  padding: 3rem 3.5rem;
-  max-width: 420px;
-  border-top: 3px solid var(--black);
+.cine-word {
+  display: block;
+  font-size: clamp(4rem, 9vw, 10rem);
+  font-weight: 300; line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--white);
+  opacity: 0; transform: translateY(50px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
-.banner-d-box .section-label { color: var(--g60); margin-bottom: 1.2rem; }
-.banner-d-box .section-label::before { background: var(--g20); }
-.banner-d-title {
-  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-  font-weight: 300;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--black);
-  margin-bottom: 1.2rem;
+.cine-word.on { opacity: 1; transform: translateY(0); }
+.cine-word:nth-child(2) { transition-delay: 0.12s; }
+.cine-word:nth-child(3) { transition-delay: 0.24s; }
+.cine-sub {
+  font-size: 0.82rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-top: 2.5rem;
+  opacity: 0; transition: opacity 0.9s ease 0.5s;
 }
-.banner-d-body {
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--g60);
-  line-height: 1.85;
-  margin-bottom: 2rem;
+.cine-sub.on { opacity: 1; }
+
+/* Tipo SPLIT FOTO — imagen derecha, texto blanco izquierda */
+.photo-split {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  min-height: 65vh;
+}
+.photo-split-text {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6% 7%; background: var(--g05);
+  border-right: 1px solid var(--g10);
+}
+.photo-split-img {
+  position: relative; overflow: hidden;
+}
+.photo-split-img .parallax-img { filter: none; }
+.photo-split-title {
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  font-weight: 300; letter-spacing: -0.02em; line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.photo-split-body {
+  font-size: 1rem; font-weight: 300; color: var(--g60); line-height: 1.9; max-width: 380px;
 }
 
-/* IMAGE GRID */
-.img-grid { display: grid; grid-template-columns: repeat(3,1fr); background: var(--black); }
-.img-grid-item { position: relative; overflow: hidden; aspect-ratio: 3/4; }
-.img-grid-item img { width: 100%; height: 120%; object-fit: cover; transition: transform 0.7s ease; display: block; }
-.img-grid-item:hover img { transform: scale(1.05); }
-.img-grid-label { position: absolute; bottom: 1.2rem; left: 1.4rem; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
-.img-grid-2 { grid-template-columns: 1fr 1fr; }
-.img-grid-2 .img-grid-item { aspect-ratio: 16/9; }
-
-/* PROBLEMA */
+/* ── PROBLEMA / SOLUCIÓN ── */
 .problem-section { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; padding: 0; }
 .problem-col { padding: 7rem 7%; }
 .problem-col:first-child { border-right: 1px solid var(--g10); background: var(--g05); }
-.problem-col h3 { font-size: 1.4rem; font-weight: 300; letter-spacing: -0.01em; margin-bottom: 1.8rem; line-height: 1.25; }
-.problem-intro { font-size: 0.82rem; color: var(--g40); margin-bottom: 1.8rem; font-weight: 300; }
+.problem-col h3 { font-size: 1.6rem; font-weight: 300; letter-spacing: -0.01em; margin-bottom: 1.8rem; line-height: 1.2; }
+.problem-intro { font-size: 0.9rem; color: var(--g40); margin-bottom: 1.8rem; font-weight: 300; }
 .plist { list-style: none; }
-.plist li { font-size: 1rem; font-weight: 300; color: var(--g60); padding: 0.85rem 0; border-bottom: 1px solid var(--g10); display: flex; align-items: flex-start; gap: 0.9rem; line-height: 1.6; }
+.plist li { font-size: 1rem; font-weight: 300; color: var(--g60); padding: 0.9rem 0; border-bottom: 1px solid var(--g10); display: flex; align-items: flex-start; gap: 1rem; line-height: 1.6; }
 .plist li::before { content: '×'; color: var(--g40); font-size: 0.9rem; flex-shrink: 0; margin-top: 3px; }
 .slist li::before { content: '→'; color: var(--black); }
 .slist li { color: var(--black); font-weight: 400; }
 
-/* PROCESO */
+/* ── PROCESO ── */
 .process-section { background: var(--white); }
 .process-header { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end; margin-bottom: 4rem; }
 .process-header p { font-size: 1rem; font-weight: 300; color: var(--g60); line-height: 1.9; }
 .process-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--g10); border-left: 1px solid var(--g10); }
-.process-step { padding: 2.4rem 2rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); }
-.step-num { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--g40); margin-bottom: 1.4rem; }
+.process-step { padding: 2.6rem 2.2rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); }
+.step-num { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--g40); margin-bottom: 1.4rem; }
 .step-title { font-size: 1.05rem; font-weight: 500; margin-bottom: 0.75rem; }
 .step-desc { font-size: 0.95rem; font-weight: 300; color: var(--g60); line-height: 1.8; }
 
-/* DIFF dark */
+/* ── DIFERENCIADORES ── */
 .diff-section { background: var(--black); display: grid; grid-template-columns: 1fr 1fr; padding: 0; }
 .diff-content { padding: 7rem 7%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--g80); }
 .diff-content .section-label { color: var(--g60); }
 .diff-content .section-label::before { background: var(--g80); }
 .diff-content h2 { color: var(--white); }
 .diff-list { list-style: none; margin-top: 2.5rem; }
-.diff-item { padding: 1.4rem 0; border-bottom: 1px solid var(--g80); display: flex; align-items: flex-start; gap: 1.2rem; }
+.diff-item { padding: 1.5rem 0; border-bottom: 1px solid var(--g80); display: flex; align-items: flex-start; gap: 1.2rem; }
 .diff-item:first-child { border-top: 1px solid var(--g80); }
-.diff-mark { font-size: 0.63rem; font-weight: 500; letter-spacing: 0.1em; color: var(--g60); flex-shrink: 0; margin-top: 3px; }
-.diff-body strong { display: block; font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+.diff-mark { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; color: var(--g60); flex-shrink: 0; margin-top: 4px; }
+.diff-body strong { display: block; font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 5px; }
 .diff-body span { font-size: 0.95rem; font-weight: 300; color: var(--g40); line-height: 1.75; }
-.diff-parallax { position: relative; overflow: hidden; min-height: 500px; }
-.diff-parallax .parallax-img { filter: brightness(0.5); }
+.diff-photo { position: relative; overflow: hidden; min-height: 500px; }
+.diff-photo .parallax-img { filter: brightness(0.55); }
 .diff-caption { position: absolute; bottom: 3rem; left: 3rem; right: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.12); }
-.diff-caption p { font-size: 1.2rem; font-weight: 300; color: var(--white); line-height: 1.55; letter-spacing: -0.01em; }
+.diff-caption p { font-size: 1.3rem; font-weight: 300; color: var(--white); line-height: 1.5; letter-spacing: -0.01em; }
 
-/* TESTIMONIOS */
+/* ── TESTIMONIOS ── */
 .testi-section { background: var(--g05); }
 .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--g10); border-left: 1px solid var(--g10); margin-top: 3.5rem; }
-.testi-card { padding: 2.4rem 2rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); display: flex; flex-direction: column; gap: 1.4rem; background: var(--white); }
+.testi-card { padding: 2.5rem 2.2rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); display: flex; flex-direction: column; gap: 1.4rem; background: var(--white); }
 .stars { display: flex; gap: 3px; }
-.star { width: 9px; height: 9px; background: var(--black); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+.star { width: 10px; height: 10px; background: var(--black); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
 .testi-q { font-size: 1rem; font-weight: 300; line-height: 1.88; color: var(--g60); flex: 1; }
-.testi-q::before { content: '"'; display: block; font-size: 2.5rem; font-weight: 300; color: var(--g20); line-height: 1; margin-bottom: 0.4rem; }
+.testi-q::before { content: '"'; display: block; font-size: 2.8rem; font-weight: 300; color: var(--g20); line-height: 1; margin-bottom: 0.4rem; }
 .testi-meta { padding-top: 1rem; border-top: 1px solid var(--g10); }
 .testi-name { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
 .testi-detail { font-size: 0.85rem; font-weight: 300; color: var(--g40); margin-top: 3px; }
 
-/* ABOUT */
+/* ── ABOUT ── */
 .about-section { display: grid; grid-template-columns: 1fr 1fr; padding: 0; background: var(--white); }
-.about-parallax { overflow: hidden; min-height: 600px; position: relative; }
-.about-parallax .parallax-img { filter: none; }
+.about-photo { overflow: hidden; min-height: 600px; position: relative; }
+.about-photo .parallax-img { filter: none; }
 .about-content { padding: 8% 7%; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--g10); }
 .about-stats { display: grid; grid-template-columns: 1fr 1fr; margin: 2.5rem 0; border: 1px solid var(--g10); }
-.astat { padding: 1.4rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); }
+.astat { padding: 1.5rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); }
 .astat:nth-child(2), .astat:nth-child(4) { border-right: none; }
 .astat:nth-child(3), .astat:nth-child(4) { border-bottom: none; }
 .astat-num { font-size: 2.2rem; font-weight: 300; letter-spacing: -0.03em; line-height: 1; }
-.astat-label { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.06em; color: var(--g40); margin-top: 5px; }
+.astat-label { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em; color: var(--g40); margin-top: 5px; }
 .about-content p { font-size: 1rem; font-weight: 300; color: var(--g60); line-height: 1.9; }
 .about-content p + p { margin-top: 1rem; }
 
-/* FIT */
+/* ── FIT ── */
 .fit-section { background: var(--g05); }
 .fit-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--g10); margin-top: 3rem; }
-.fit-col { padding: 2.5rem; background: var(--white); }
+.fit-col { padding: 2.8rem; background: var(--white); }
 .fit-col:first-child { border-right: 1px solid var(--g10); }
-.fit-col-title { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g40); padding-bottom: 1.2rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--g10); }
+.fit-col-title { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g40); padding-bottom: 1.2rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--g10); }
 .flist { list-style: none; }
-.flist li { font-size: 1rem; font-weight: 300; padding: 0.75rem 0; border-bottom: 1px solid var(--g05); display: flex; align-items: flex-start; gap: 0.9rem; line-height: 1.55; }
+.flist li { font-size: 1rem; font-weight: 300; padding: 0.8rem 0; border-bottom: 1px solid var(--g05); display: flex; align-items: flex-start; gap: 1rem; line-height: 1.6; }
 .fit-col.yes .flist li { color: var(--black); }
 .fit-col.yes .flist li::before { content: '→'; color: var(--black); font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
 .fit-col.no .flist li { color: var(--g60); }
 .fit-col.no .flist li::before { content: '×'; color: var(--g40); font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
-.fit-note { padding: 2rem 2.5rem; background: var(--black); display: flex; align-items: flex-start; gap: 1.5rem; border: 1px solid var(--g10); border-top: none; }
+.fit-note { padding: 2.2rem 2.8rem; background: var(--black); display: flex; align-items: flex-start; gap: 1.5rem; border: 1px solid var(--g10); border-top: none; }
 .fit-arrow { font-size: 1rem; color: var(--g60); flex-shrink: 0; margin-top: 3px; }
 .fit-note p { font-size: 0.95rem; font-weight: 300; color: var(--g40); line-height: 1.88; }
 .fit-note strong { display: block; font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 4px; }
 
-/* FAQ */
+/* ── FAQ ── */
 .faq-section { background: var(--white); }
 .faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 7rem; align-items: start; }
-.faq-intro p { font-size: 0.85rem; font-weight: 300; color: var(--g60); line-height: 1.9; margin-top: 1.5rem; }
+.faq-intro p { font-size: 1rem; font-weight: 300; color: var(--g60); line-height: 1.9; margin-top: 1.5rem; }
 .faq-list { display: flex; flex-direction: column; }
 .faq-item { border-bottom: 1px solid var(--g10); }
-.faq-q { width: 100%; background: none; border: none; text-align: left; padding: 1.4rem 0; font-family: var(--sans); font-size: 1.05rem; font-weight: 400; color: var(--black); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; line-height: 1.4; }
-.faq-arrow { flex-shrink: 0; color: var(--g40); font-size: 1.3rem; transition: transform 0.25s; }
+.faq-q { width: 100%; background: none; border: none; text-align: left; padding: 1.5rem 0; font-family: var(--sans); font-size: 1.05rem; font-weight: 400; color: var(--black); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; line-height: 1.4; }
+.faq-arrow { flex-shrink: 0; color: var(--g40); font-size: 1.4rem; transition: transform 0.25s; }
 .faq-item.open .faq-arrow { transform: rotate(45deg); }
 .faq-ans { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
 .faq-item.open .faq-ans { max-height: 400px; padding-bottom: 1.5rem; }
 .faq-ans p { font-size: 1rem; font-weight: 300; color: var(--g60); line-height: 1.9; }
 
-/* CONTACT */
+/* ── CONTACTO ── */
 .contact-section { background: var(--black); display: grid; grid-template-columns: 1fr 1fr; padding: 0; }
 .contact-content { padding: 7rem 7%; border-right: 1px solid var(--g80); display: flex; flex-direction: column; justify-content: center; }
 .contact-content .section-label { color: var(--g60); }
 .contact-content .section-label::before { background: var(--g80); }
 .contact-content h2 { color: var(--white); }
-.contact-content > p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.55); margin-top: 1.5rem; line-height: 1.9; }
+.contact-content > p { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.5); margin-top: 1.5rem; line-height: 1.9; }
 .cphones { margin-top: 3rem; border-top: 1px solid var(--g80); }
-.cphone { padding: 1.2rem 0; border-bottom: 1px solid var(--g80); display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: opacity 0.2s; }
+.cphone { padding: 1.3rem 0; border-bottom: 1px solid var(--g80); display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: opacity 0.2s; }
 .cphone:hover { opacity: 0.6; }
-.cphone-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.cphone-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 .cphone-num { font-size: 1.1rem; font-weight: 300; color: var(--white); }
 .contact-form-col { padding: 7rem 7%; display: flex; flex-direction: column; justify-content: center; }
-.price-note { padding: 1.2rem 1.5rem; border: 1px solid var(--g80); margin-bottom: 2.5rem; }
-.price-note strong { display: block; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
-.price-note p { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.65; }
+.price-note { padding: 1.3rem 1.6rem; border: 1px solid var(--g80); margin-bottom: 2.5rem; }
+.price-note strong { display: block; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 6px; }
+.price-note p { font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.65; }
 .fg { display: flex; flex-direction: column; gap: 7px; margin-bottom: 1.1rem; }
-.fg label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
-.fg input, .fg select, .fg textarea { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; padding: 13px 14px; font-family: var(--sans); font-size: 1rem; font-weight: 300; outline: none; transition: border-color 0.2s; width: 100%; appearance: none; }
-.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.35); }
-.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: rgba(255,255,255,0.6); }
+.fg label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.fg input, .fg select, .fg textarea { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); color: #fff; padding: 13px 14px; font-family: var(--sans); font-size: 1rem; font-weight: 300; outline: none; transition: border-color 0.2s; width: 100%; appearance: none; }
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.3); }
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: rgba(255,255,255,0.55); }
 .fg select option { background: var(--g90); color: #fff; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.form-submit { width: 100%; font-family: var(--sans); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--black); background: var(--white); border: none; padding: 16px; cursor: pointer; margin-top: 0.5rem; transition: opacity 0.2s; }
-.form-submit:hover { opacity: 0.8; }
-.form-privacy { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 0.8rem; line-height: 1.5; }
-.form-privacy a { color: rgba(255,255,255,0.5); }
+.form-submit { width: 100%; font-family: var(--sans); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--white); border: none; padding: 16px; cursor: pointer; margin-top: 0.5rem; transition: opacity 0.2s; }
+.form-submit:hover { opacity: 0.82; }
+.form-privacy { font-size: 0.82rem; color: rgba(255,255,255,0.3); margin-top: 0.8rem; line-height: 1.5; }
+.form-privacy a { color: rgba(255,255,255,0.45); }
 
-/* FOOTER */
-footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid var(--g80); }
-.footer-logo { font-size: 0.76rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g60); text-decoration: none; }
+/* ── FOOTER ── */
+footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid var(--g80); }
+.footer-logo { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g60); text-decoration: none; }
 .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
-.footer-links a { font-size: 0.68rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g80); text-decoration: none; transition: color 0.2s; }
+.footer-links a { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--g80); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--g40); }
-.footer-copy { font-size: 0.68rem; color: var(--g80); }
+.footer-copy { font-size: 0.78rem; color: var(--g80); }
 
-/* WA */
-.wa-btn { position: fixed; bottom: 2rem; right: 2rem; z-index: 300; width: 46px; height: 46px; background: var(--white); border: 1px solid var(--g10); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 2px 12px rgba(0,0,0,0.1); transition: transform 0.2s; }
+/* ── WHATSAPP ── */
+.wa-btn { position: fixed; bottom: 2rem; right: 2rem; z-index: 300; width: 50px; height: 50px; background: var(--white); border: 1px solid var(--g10); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 2px 16px rgba(0,0,0,0.12); transition: transform 0.2s; }
 .wa-btn:hover { transform: translateY(-2px); }
-.wa-btn svg { width: 20px; height: 20px; fill: var(--black); }
+.wa-btn svg { width: 22px; height: 22px; fill: var(--black); }
 
-/* FADE IN */
-.fi { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+/* ── FADE IN ── */
+.fi { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fi.on { opacity: 1; transform: translateY(0); }
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media (max-width: 960px) {
-  .hero, .problem-section, .diff-section, .about-section, .contact-section, .banner-c { grid-template-columns: 1fr; }
-  .hero-parallax, .diff-parallax, .about-parallax, .banner-c-img { min-height: 55vw; }
-  .hero-right { display: block; }
-  .hero-content, .diff-content, .about-content, .contact-content, .contact-form-col, .problem-col { border: none; }
-  .problem-col:first-child { border-bottom: 1px solid var(--g10); }
-  .banner-a { height: 60vh; }
-  .banner-b { height: 50vh; }
-  .banner-b-word { font-size: clamp(3rem, 12vw, 6rem); }
-  .banner-d { height: 60vh; }
-  .banner-d-content { justify-content: center; align-items: flex-end; padding-bottom: 3rem; }
-  .banner-d-box { max-width: 100%; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3) { border-top: 1px solid var(--g10); }
+  .problem-section, .diff-section, .about-section, .contact-section { grid-template-columns: 1fr; }
+  .photo-offset, .photo-split { grid-template-columns: 1fr; }
+  .photo-offset-img, .photo-split-img, .about-photo, .diff-photo { min-height: 55vw; }
+  .problem-col:first-child { border-right: none; border-bottom: 1px solid var(--g10); }
+  .diff-content, .about-content, .contact-content, .contact-form-col { border: none; }
   .process-header { grid-template-columns: 1fr; gap: 2rem; }
   .process-grid { grid-template-columns: 1fr 1fr; }
   .testi-grid { grid-template-columns: 1fr; border: none; }
   .testi-card { border: 1px solid var(--g10); margin-bottom: 1px; }
-  .img-grid { grid-template-columns: 1fr 1fr; }
-  .img-grid-2 { grid-template-columns: 1fr; }
   .fit-grid { grid-template-columns: 1fr; }
   .fit-col:first-child { border-right: none; border-bottom: 1px solid var(--g10); }
-  .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
   .form-row { grid-template-columns: 1fr; }
   footer { flex-direction: column; align-items: flex-start; }
+  .hero-cover h1 { font-size: clamp(2.5rem, 9vw, 5rem); }
+  .photo-full { height: 60vh; }
+  .photo-cinematic { height: 55vh; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 600px) {
   section { padding: 5rem 5%; }
-  .hero-content, .problem-col, .diff-content, .about-content, .contact-content, .contact-form-col, .banner-c-text { padding: 5rem 5%; }
+  .hero-cover-content { padding: 0 5% 8%; }
   .process-grid { grid-template-columns: 1fr; }
-  .img-grid { grid-template-columns: 1fr; }
-  .banner-a { height: 70vh; }
-  .banner-a-content { padding: 5% 5% 8%; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .photo-full-title { font-size: clamp(2.2rem, 10vw, 4rem); }
+  .problem-col, .diff-content, .about-content, .contact-content, .contact-form-col, .photo-offset-text, .photo-split-text { padding: 5rem 5%; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- NAV transparente sobre portada -->
+<nav id="nav">
   <a href="#" class="nav-logo"><img src="IMG/logo-negro.png" alt="David Seguí Arquitectos"></a>
   <a href="#contacto" class="nav-cta">Solicitar reunión</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero" style="padding:0">
-  <div class="hero-content">
-    <div class="eyebrow">Altea · Costa Blanca · Estudio colegiado</div>
+<!-- ══════════════════════════════════════
+     HERO — PORTADA A PANTALLA COMPLETA
+══════════════════════════════════════ -->
+<div class="hero-cover parallax-wrap">
+  <img class="parallax-img" src="IMG/villa-catara.webp" alt="Villa Catara — reforma integral Altea" data-parallax="0.4">
+  <div class="hero-cover-content">
+    <div class="hero-eyebrow">Altea · Costa Blanca · Estudio colegiado</div>
     <h1>Tu villa,<br>reformada como<br>merece serlo.</h1>
-    <p class="hero-sub">Proyecto arquitectónico completo, licencia municipal y dirección de obra. Un solo equipo técnico responsable, de principio a fin. Sin sorpresas, sin obra ilegal, sin intermediarios.</p>
-    <div class="hero-actions">
-      <a href="#contacto" class="btn-black">Solicitar reunión inicial</a>
-      <a href="tel:+34617740163" class="hero-phone">617 74 01 63</a>
+    <div class="hero-bottom">
+      <p class="hero-sub">Proyecto completo, licencia municipal y dirección de obra. Un solo equipo técnico responsable de principio a fin.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-white">Solicitar reunión</a>
+        <a href="tel:+34617740163" class="btn-ghost">617 74 01 63</a>
+      </div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-parallax parallax-wrap">
-      <img class="parallax-img" src="IMG/reforma-01.webp" alt="Reforma integral Altea" data-parallax="0.3">
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">+20</div><div class="stat-label">Años en Costa Blanca</div></div>
-      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Obras con licencia</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Titulaciones en equipo</div></div>
-    </div>
-  </div>
-</section>
+</div>
 
-<!-- TRUST BAR -->
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">+20</div><div class="stat-label">Años en Costa Blanca</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Obras con licencia</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Titulaciones en equipo</div></div>
+  <div class="stat"><div class="stat-num">0</div><div class="stat-label">Subcontratas en proyecto</div></div>
+</div>
+
+<!-- Trust bar -->
 <div class="trust-bar">
   <div class="trust-item"><div class="trust-dot"></div><span class="trust-txt">Estudio colegiado en Altea</span></div>
   <div class="trust-item"><div class="trust-dot"></div><span class="trust-txt">Cálculo estructural propio</span></div>
@@ -529,22 +565,14 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
 </section>
 
-<!-- ═══ BANNER A — Villa Catara, tipografía enorme ═══ -->
-<div class="banner-a parallax-wrap">
-  <img class="parallax-img" src="IMG/villa-catara.webp" alt="Villa Catara" data-parallax="0.45">
-  <div class="banner-a-overlay"></div>
-  <div class="banner-a-content">
-    <div class="banner-a-tag">Proyecto destacado · Villa Catara · Altea</div>
-    <h2 class="banner-a-title">Reforma<br><em>integral.</em><br>Hecha bien.</h2>
-    <p class="banner-a-sub">Redistribución completa con cálculo estructural propio, proyecto visado y dirección de obra desde el primer día.</p>
+<!-- ══ FOTO SEPARADORA 1 — FULL, Villa 4B exterior ══ -->
+<div class="photo-full parallax-wrap">
+  <img class="parallax-img" src="IMG/villa-4b.jpg" alt="Villa 4B Altea" data-parallax="0.45">
+  <div class="photo-full-overlay"></div>
+  <div class="photo-full-content">
+    <div class="photo-tag">Proyecto · Villa 4B · Costa Blanca</div>
+    <h2 class="photo-full-title">Reforma<br><em>integral.</em><br>Hecha bien.</h2>
   </div>
-</div>
-
-<!-- IMAGE GRID 3 proyectos -->
-<div class="img-grid">
-  <div class="img-grid-item"><img src="IMG/roma-15.webp" alt="Roma 15" data-parallax="0.15"><span class="img-grid-label">Roma 15</span></div>
-  <div class="img-grid-item"><img src="IMG/costa-esmeralda.webp" alt="Costa Esmeralda" data-parallax="0.15"><span class="img-grid-label">Costa Esmeralda</span></div>
-  <div class="img-grid-item"><img src="IMG/casa-golf.webp" alt="Casa Golf" data-parallax="0.15"><span class="img-grid-label">Casa Golf</span></div>
 </div>
 
 <!-- PROCESO -->
@@ -561,23 +589,23 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
     <div class="process-step fi"><div class="step-num">Fase 02</div><div class="step-title">Anteproyecto y viabilidad</div><p class="step-desc">Propuesta de redistribución, soluciones técnicas preliminares y presupuesto orientativo con mediciones reales. Defines si seguimos adelante con criterio, no con incertidumbre.</p></div>
     <div class="process-step fi"><div class="step-num">Fase 03</div><div class="step-title">Proyecto ejecutivo</div><p class="step-desc">Proyecto completo conforme al CTE: planos, memoria, mediciones, especificaciones. Cálculo estructural propio. Estudio de eficiencia energética integrado.</p></div>
     <div class="process-step fi"><div class="step-num">Fase 04</div><div class="step-title">Licencia municipal</div><p class="step-desc">Presentación del proyecto ante el ayuntamiento, gestión de tasas y seguimiento hasta obtención de licencia. No tienes que poner un pie en el ayuntamiento.</p></div>
-    <div class="process-step fi"><div class="step-num">Fase 05</div><div class="step-title">Dirección de obra</div><p class="step-desc">Control técnico de ejecución, supervisión de calidad y coordinación de seguridad durante toda la obra. Somos el responsable técnico legal ante cualquier incidencia.</p></div>
+    <div class="process-step fi"><div class="step-num">Fase 05</div><div class="step-title">Dirección de obra</div><p class="step-desc">Control técnico de ejecución, supervisión de calidad y coordinación de seguridad. Somos el responsable técnico legal ante cualquier incidencia.</p></div>
     <div class="process-step fi"><div class="step-num">Fase 06</div><div class="step-title">Entrega y legalización</div><p class="step-desc">Acta de verificación de acabados, certificado final de obra y gestiones administrativas. Cuando entregamos, el inmueble está completamente legalizado.</p></div>
   </div>
 </section>
 
-<!-- ═══ BANNER B — texto enorme mix-blend ═══ -->
-<div class="banner-b parallax-wrap">
-  <img class="parallax-img" src="IMG/reforma-02.webp" alt="Reforma" data-parallax="0.4">
-  <div class="banner-b-content">
-    <span class="banner-b-word">Sin</span>
-    <span class="banner-b-word">intermediarios.</span>
-    <span class="banner-b-word">Sin excusas.</span>
-    <p class="banner-b-caption">David Seguí Arquitectos · Altea · Costa Blanca</p>
+<!-- ══ FOTO SEPARADORA 2 — CINEMATIC, texto animado ══ -->
+<div class="photo-cinematic parallax-wrap" data-cinematic>
+  <img class="parallax-img" src="IMG/roma-21.webp" alt="Roma 21" data-parallax="0.4">
+  <div class="photo-cinematic-content">
+    <span class="cine-word">Sin</span>
+    <span class="cine-word">intermediarios.</span>
+    <span class="cine-word">Sin excusas.</span>
+    <p class="cine-sub">David Seguí Arquitectos · Altea · Costa Blanca</p>
   </div>
 </div>
 
-<!-- DIFERENCIADORES dark -->
+<!-- DIFERENCIADORES -->
 <section class="diff-section" style="padding:0">
   <div class="diff-content fi">
     <div class="section-label">Por qué elegirnos</div>
@@ -585,33 +613,27 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
     <ul class="diff-list">
       <li class="diff-item"><span class="diff-mark">01</span><div class="diff-body"><strong>Tres titulaciones en el mismo equipo</strong><span>Ingeniería industrial + arquitectura técnica + arquitectura. Control técnico total sin subcontratar fases críticas. Menos intermediarios, más responsabilidad directa.</span></div></li>
       <li class="diff-item"><span class="diff-mark">02</span><div class="diff-body"><strong>Cálculo estructural propio</strong><span>Eliminamos muros de carga y reforzamos forjados sin depender de terceros. Menor riesgo, mayor control y tiempos más ajustados.</span></div></li>
-      <li class="diff-item"><span class="diff-mark">03</span><div class="diff-body"><strong>Transparencia radical desde el día uno</strong><span>Carpeta compartida con planos, licencias, presupuestos y avances. Siempre actualizada. No hay decisiones que tomar sin que las entiendas.</span></div></li>
-      <li class="diff-item"><span class="diff-mark">04</span><div class="diff-body"><strong>Proyectos seleccionados, no volumen</strong><span>Trabajamos con un número limitado de proyectos anuales para garantizar la dedicación que cada reforma de esta envergadura merece.</span></div></li>
+      <li class="diff-item"><span class="diff-mark">03</span><div class="diff-body"><strong>Transparencia radical desde el día uno</strong><span>Carpeta compartida con planos, licencias, presupuestos y avances. No hay decisiones que tomar sin que las entiendas.</span></div></li>
+      <li class="diff-item"><span class="diff-mark">04</span><div class="diff-body"><strong>Proyectos seleccionados, no volumen</strong><span>Número limitado de proyectos anuales para garantizar la dedicación que cada reforma de esta envergadura merece.</span></div></li>
     </ul>
   </div>
-  <div class="diff-parallax parallax-wrap">
-    <img class="parallax-img" src="IMG/hotel-abaco.webp" alt="Hotel Abaco" data-parallax="0.35">
+  <div class="diff-photo parallax-wrap">
+    <img class="parallax-img" src="IMG/costa-esmeralda.webp" alt="Costa Esmeralda" data-parallax="0.35">
     <div class="diff-caption"><p>La reforma bien hecha<br>no se sufre.<br>Se disfruta.</p></div>
   </div>
 </section>
 
-<!-- ═══ BANNER C — split foto / texto oscuro ═══ -->
-<div class="banner-c">
-  <div class="banner-c-img parallax-wrap">
-    <img class="parallax-img" src="IMG/mascarat.webp" alt="Centro Bienestar Mascarat" data-parallax="0.3">
+<!-- ══ FOTO SEPARADORA 3 — OFFSET, Casa Golf exterior ══ -->
+<div class="photo-offset">
+  <div class="photo-offset-img parallax-wrap">
+    <img class="parallax-img" src="IMG/casa-golf.webp" alt="Casa Golf" data-parallax="0.3">
   </div>
-  <div class="banner-c-text">
-    <div class="banner-c-tag">Centro Bienestar Mascarat</div>
-    <div class="banner-c-num">20+</div>
-    <h3 class="banner-c-title">Años diseñando<br>espacios que<br>funcionan.</h3>
-    <p class="banner-c-desc">Cada proyecto que aceptamos lo abordamos con el mismo rigor técnico, independientemente del presupuesto. Si lo firmamos, respondemos.</p>
+  <div class="photo-offset-text">
+    <div class="photo-offset-tag">Casa Golf · Altea Hills</div>
+    <div class="photo-offset-num">+20</div>
+    <h3 class="photo-offset-title">Años diseñando<br>espacios que<br>funcionan.</h3>
+    <p class="photo-offset-desc">Cada proyecto que aceptamos lo abordamos con el mismo rigor técnico. Si lo firmamos, respondemos.</p>
   </div>
-</div>
-
-<!-- IMAGE GRID 2 proyectos -->
-<div class="img-grid img-grid-2">
-  <div class="img-grid-item"><img src="IMG/roma-21.webp" alt="Roma 21" data-parallax="0.15"><span class="img-grid-label">Roma 21</span></div>
-  <div class="img-grid-item"><img src="IMG/reforma-altea.webp" alt="Reforma Altea" data-parallax="0.15"><span class="img-grid-label">Reforma integral Altea</span></div>
 </div>
 
 <!-- TESTIMONIOS -->
@@ -637,23 +659,23 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
 </section>
 
-<!-- ═══ BANNER D — imagen full + caja flotante blanca ═══ -->
-<div class="banner-d parallax-wrap">
-  <img class="parallax-img" src="IMG/villa-4b.jpg" alt="Villa 4B" data-parallax="0.4">
-  <div class="banner-d-content">
-    <div class="banner-d-box">
-      <div class="section-label">Villa 4B · Ampliación</div>
-      <h3 class="banner-d-title">Ampliar sin<br>permisos cuesta<br>más caro.</h3>
-      <p class="banner-d-body">Toda ampliación requiere proyecto arquitectónico, licencia de obra mayor y dirección facultativa. Nosotros lo gestionamos todo — tú solo decides.</p>
-      <a href="#contacto" class="btn-black">Consultar mi proyecto</a>
-    </div>
+<!-- ══ FOTO SEPARADORA 4 — SPLIT, Roma 15 exterior ══ -->
+<div class="photo-split">
+  <div class="photo-split-text fi">
+    <div class="section-label">Ampliación sin licencia cuesta más caro</div>
+    <h3 class="photo-split-title">Toda obra requiere<br>proyecto y dirección<br>facultativa.</h3>
+    <p class="photo-split-body">Nosotros gestionamos el proyecto completo, la licencia municipal y dirigimos la obra desde el primer día hasta la entrega. Tú solo decides.</p>
+    <a href="#contacto" class="btn-black" style="margin-top:2.5rem;display:inline-block">Consultar mi proyecto</a>
+  </div>
+  <div class="photo-split-img parallax-wrap">
+    <img class="parallax-img" src="IMG/roma-15.webp" alt="Roma 15" data-parallax="0.3">
   </div>
 </div>
 
 <!-- SOBRE NOSOTROS -->
 <section class="about-section" style="padding:0">
-  <div class="about-parallax parallax-wrap">
-    <img class="parallax-img" src="IMG/reforma-03.webp" alt="Estudio David Seguí" data-parallax="0.3">
+  <div class="about-photo parallax-wrap">
+    <img class="parallax-img" src="IMG/mascarat.webp" alt="Centro Bienestar Mascarat" data-parallax="0.3">
   </div>
   <div class="about-content">
     <div class="section-label fi">El estudio</div>
@@ -700,7 +722,7 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
   <div class="fit-note fi">
     <div class="fit-arrow">→</div>
-    <p><strong>Sobre la inversión mínima</strong>Nuestros proyectos de reforma integral son rentables a partir de 300.000€ de inversión total. Por debajo de ese umbral, nuestra metodología no aporta el valor que justifica su coste. Si tu proyecto está en ese rango o por encima, nuestra dedicación y rigor técnico tienen sentido económico para ti.</p>
+    <p><strong>Sobre la inversión mínima</strong>Nuestros proyectos de reforma integral son rentables a partir de 300.000€ de inversión total. Si tu proyecto está en ese rango o por encima, nuestra dedicación y rigor técnico tienen pleno sentido económico para ti.</p>
   </div>
 </section>
 
@@ -715,7 +737,7 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
     </div>
     <div class="faq-list fi">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿En qué se diferencia contratar un arquitecto de contratar directamente a una constructora?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Una constructora ejecuta, pero no proyecta ni asume responsabilidad técnica legal. Nosotros elaboramos el proyecto completo, tramitamos la licencia municipal y dirigimos la obra. Si hay un problema estructural durante la ejecución, el responsable legal somos nosotros.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Mi reforma necesita arquitecto obligatoriamente?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Legalmente sí, cuando implica modificación de estructura portante, redistribución con cambio de instalaciones generales, ampliación de superficie, cambio de uso o intervención en fachada. Si solo necesitas cambiar suelos o pintar sin tocar instalaciones, probablemente no necesites nuestro servicio.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Mi reforma necesita arquitecto obligatoriamente?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Legalmente sí, cuando implica modificación de estructura portante, redistribución con cambio de instalaciones, ampliación de superficie, cambio de uso o intervención en fachada. Si solo necesitas cambiar suelos o pintar sin tocar instalaciones, probablemente no necesites nuestro servicio.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda en obtenerse la licencia de obra mayor en Altea?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>En Altea y municipios de la Marina Baixa, entre 2 y 6 meses desde la presentación del proyecto. Nosotros hacemos el seguimiento completo sin que tengas que intervenir.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hacéis obra "llave en mano"?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Nuestro servicio es proyecto + dirección de obra. La ejecución puede realizarse con una constructora de nuestra recomendación o con la que elija el cliente, siempre que acepte trabajar bajo nuestra dirección facultativa.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Trabajáis solo en Altea o también en otros municipios?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Tenemos estudio en Altea pero trabajamos en toda la Marina Baixa y Marina Alta: Calpe, Moraira, Dénia, Alfaz del Pi, Benidorm y municipios colindantes.</p></div></div>
@@ -732,7 +754,7 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
     <div class="cphones">
       <a href="tel:+34965843795" class="cphone"><span class="cphone-label">Teléfono fijo</span><span class="cphone-num">965 84 37 95</span></a>
       <a href="https://wa.link/lo74li" class="cphone"><span class="cphone-label">WhatsApp</span><span class="cphone-num">617 74 01 63</span></a>
-      <a href="/cdn-cgi/l/email-protection#30595e565f70545146595443555745595142414559445553445f431e535f5d" class="cphone"><span class="cphone-label">Email</span><span class="cphone-num" style="font-size:0.82rem"><span class="__cf_email__" data-cfemail="0a63646c654a6e6b7c636e796f6d7f636b787b7f637e6f697e657924696567">[email&#160;protected]</span></span></a>
+      <a href="mailto:info@davidseguiarquitectos.com" class="cphone"><span class="cphone-label">Email</span><span class="cphone-num" style="font-size:0.9rem">info@davidseguiarquitectos.com</span></a>
     </div>
   </div>
   <div class="contact-form-col">
@@ -745,9 +767,13 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
         <div class="fg"><label>Nombre</label><input type="text" placeholder="Tu nombre" required></div>
         <div class="fg"><label>Teléfono / WhatsApp</label><input type="tel" placeholder="+34 6XX XXX XXX" required></div>
       </div>
-      <div class="fg"><label>Municipio del inmueble</label><select><option value="">Seleccionar</option><option>Altea</option><option>Calpe</option><option>Moraira</option><option>Alfaz del Pi</option><option>Benidorm</option><option>Dénia</option><option>Otro municipio de la Costa Blanca</option></select></div>
+      <div class="fg"><label>Municipio del inmueble</label>
+        <select><option value="">Seleccionar</option><option>Altea</option><option>Calpe</option><option>Moraira</option><option>Alfaz del Pi</option><option>Benidorm</option><option>Dénia</option><option>Otro municipio de la Costa Blanca</option></select>
+      </div>
       <div class="fg"><label>Cuéntanos brevemente el proyecto</label><textarea rows="4" placeholder="Tipo de inmueble, qué quieres hacer, cuándo te gustaría empezar…"></textarea></div>
-      <div class="fg"><label>Presupuesto estimado</label><select><option value="">Seleccionar rango</option><option>Entre 300.000€ y 400.000€</option><option>Entre 400.000€ y 500.000€</option><option>Más de 500.000€</option><option>Sin definir — necesito orientación</option></select></div>
+      <div class="fg"><label>Presupuesto estimado</label>
+        <select><option value="">Seleccionar rango</option><option>Entre 300.000€ y 400.000€</option><option>Entre 400.000€ y 500.000€</option><option>Más de 500.000€</option><option>Sin definir — necesito orientación</option></select>
+      </div>
       <button type="submit" class="form-submit">Solicitar reunión inicial →</button>
       <p class="form-privacy">Al enviar aceptas nuestra <a href="#">política de privacidad</a>. No compartimos tus datos con terceros.</p>
     </form>
@@ -771,7 +797,16 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+// NAV transparente → sólida al scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  // logo se vuelve negro cuando nav es blanca
+  const logo = nav.querySelector('.nav-logo img');
+  logo.style.filter = window.scrollY > 60 ? 'none' : 'brightness(0) invert(1)';
+}, { passive: true });
+
 // PARALLAX
 function updateParallax() {
   document.querySelectorAll('[data-parallax]').forEach(img => {
@@ -790,24 +825,22 @@ window.addEventListener('scroll', updateParallax, { passive: true });
 window.addEventListener('resize', updateParallax);
 updateParallax();
 
-// FADE IN + BANNER B TRIGGER
+// INTERSECTION OBSERVER — fade-in + cinematic
 const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      if (e.target.classList.contains('fi')) {
-        setTimeout(() => e.target.classList.add('on'), i * 65);
-      }
-      if (e.target.classList.contains('banner-b')) {
-        e.target.querySelectorAll('.banner-b-word, .banner-b-caption').forEach((el, j) => {
-          setTimeout(() => el.classList.add('visible'), j * 120);
-        });
-      }
-      obs.unobserve(e.target);
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    if (el.classList.contains('fi')) el.classList.add('on');
+    if (el.hasAttribute('data-cinematic')) {
+      el.querySelectorAll('.cine-word, .cine-sub').forEach((w, i) => {
+        setTimeout(() => w.classList.add('on'), i * 130);
+      });
     }
+    obs.unobserve(el);
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.12 });
 
-document.querySelectorAll('.fi, .banner-b').forEach(el => obs.observe(el));
+document.querySelectorAll('.fi, [data-cinematic]').forEach(el => obs.observe(el));
 
 // FAQ
 function toggleFaq(btn) {
@@ -818,4 +851,14 @@ function toggleFaq(btn) {
 }
 
 // FORM
-function handleSubmit(e
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Enviado — te contactamos pronto ✓';
+  btn.style.background = 'var(--g20)';
+  btn.style.color = 'var(--g60)';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
