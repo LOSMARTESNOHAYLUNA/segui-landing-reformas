@@ -11,15 +11,15 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --black:   #0A0A0A;
-  --g90:     #161616;
-  --g80:     #242424;
-  --g60:     #525252;
-  --g40:     #8A8A8A;
-  --g20:     #C8C8C8;
-  --g10:     #E8E8E8;
-  --g05:     #F4F4F4;
-  --white:   #FAFAFA;
+  --black:  #0A0A0A;
+  --g90:    #161616;
+  --g80:    #242424;
+  --g60:    #525252;
+  --g40:    #8A8A8A;
+  --g20:    #C8C8C8;
+  --g10:    #E8E8E8;
+  --g05:    #F4F4F4;
+  --white:  #FAFAFA;
   --sans: 'DM Sans', system-ui, sans-serif;
 }
 html { scroll-behavior: smooth; }
@@ -33,17 +33,17 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; a
 
 /* PARALLAX BASE */
 .parallax-wrap { position: relative; overflow: hidden; }
-.parallax-img { position: absolute; inset: -20% 0; width: 100%; height: 140%; object-fit: cover; filter: grayscale(100%); will-change: transform; }
+.parallax-img { position: absolute; inset: -20% 0; width: 100%; height: 140%; object-fit: cover; will-change: transform; }
 
 /* HERO */
 .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 68px; }
-.hero-content { display: flex; flex-direction: column; justify-content: center; padding: 8% 7% 8% 8%; border-right: 1px solid var(--g10); position: relative; z-index: 1; background: var(--white); }
+.hero-content { display: flex; flex-direction: column; justify-content: center; padding: 8% 7% 8% 8%; border-right: 1px solid var(--g10); background: var(--white); position: relative; z-index: 1; }
 .eyebrow { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--g40); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 14px; }
 .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--g20); }
 h1 { font-size: clamp(2.5rem, 4vw, 4.2rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 2rem; }
 .hero-sub { font-size: 0.93rem; font-weight: 300; color: var(--g60); max-width: 400px; margin-bottom: 3rem; line-height: 1.85; }
 .hero-actions { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
-.btn-black { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--black); padding: 14px 30px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+.btn-black { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--black); padding: 14px 30px; text-decoration: none; display: inline-block; transition: opacity 0.2s; border: none; cursor: pointer; }
 .btn-black:hover { opacity: 0.72; }
 .btn-outline { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: transparent; padding: 13px 30px; border: 1px solid var(--g20); text-decoration: none; display: inline-block; transition: border-color 0.2s; }
 .btn-outline:hover { border-color: var(--black); }
@@ -51,6 +51,7 @@ h1 { font-size: clamp(2.5rem, 4vw, 4.2rem); font-weight: 300; line-height: 1.08;
 .hero-phone:hover { color: var(--black); }
 .hero-right { display: grid; grid-template-rows: 1fr auto; overflow: hidden; }
 .hero-parallax { position: relative; overflow: hidden; min-height: 400px; }
+.hero-parallax .parallax-img { filter: none; }
 .hero-stats { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--g10); }
 .stat { padding: 1.4rem 1.6rem; border-right: 1px solid var(--g10); }
 .stat:last-child { border-right: none; }
@@ -71,13 +72,220 @@ section { padding: 7rem 8%; }
 .section-label::before { content: ''; width: 22px; height: 1px; background: var(--g20); }
 h2 { font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.025em; }
 
-/* PARALLAX BANNER — full bleed between sections */
-.parallax-banner { position: relative; height: 55vh; overflow: hidden; }
-.parallax-banner .parallax-img { filter: grayscale(100%) brightness(0.45); }
-.parallax-banner-content { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 4rem 8%; }
-.parallax-banner-text { color: var(--white); font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 300; line-height: 1.4; letter-spacing: -0.01em; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1.5rem; max-width: 600px; }
+/* ═══════════════════════════════════════════
+   PARALLAX BANNERS — EFECTO DRAMÁTICO
+═══════════════════════════════════════════ */
 
-/* PROBLEM */
+/* BANNER TIPO A — texto grande superpuesto con overlay degradado */
+.banner-a {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+.banner-a .parallax-img {
+  filter: none;
+}
+.banner-a-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.72) 0%,
+    rgba(0,0,0,0.2) 50%,
+    rgba(0,0,0,0.55) 100%
+  );
+}
+.banner-a-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5% 8% 6%;
+}
+.banner-a-tag {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.banner-a-tag::before { content: ''; width: 22px; height: 1px; background: rgba(255,255,255,0.35); }
+.banner-a-title {
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+.banner-a-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+.banner-a-sub {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  max-width: 480px;
+  line-height: 1.8;
+  border-left: 2px solid rgba(255,255,255,0.25);
+  padding-left: 1.2rem;
+}
+
+/* BANNER TIPO B — texto centrado, tipografía enorme, mix-blend */
+.banner-b {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.banner-b .parallax-img {
+  filter: brightness(0.55) saturate(0.8);
+}
+.banner-b-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 8%;
+}
+.banner-b-word {
+  display: block;
+  font-size: clamp(4rem, 10vw, 11rem);
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  color: var(--white);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.banner-b-word.visible { opacity: 1; transform: translateY(0); }
+.banner-b-word:nth-child(2) { transition-delay: 0.1s; }
+.banner-b-word:nth-child(3) { transition-delay: 0.2s; }
+.banner-b-caption {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2.5rem;
+  opacity: 0;
+  transition: opacity 0.9s ease 0.4s;
+}
+.banner-b-caption.visible { opacity: 1; }
+
+/* BANNER TIPO C — split: foto izq, texto dcha sobre color */
+.banner-c {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 65vh;
+}
+.banner-c-img {
+  position: relative;
+  overflow: hidden;
+}
+.banner-c-img .parallax-img { filter: none; }
+.banner-c-text {
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6% 7%;
+}
+.banner-c-num {
+  font-size: clamp(5rem, 8vw, 9rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: rgba(255,255,255,0.08);
+  margin-bottom: -1.5rem;
+}
+.banner-c-title {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+.banner-c-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--g40);
+  line-height: 1.9;
+  max-width: 360px;
+}
+.banner-c-tag {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--g60);
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.banner-c-tag::before { content: ''; width: 20px; height: 1px; background: var(--g80); }
+
+/* BANNER TIPO D — imagen full + texto en esquina con caja */
+.banner-d {
+  position: relative;
+  height: 75vh;
+  overflow: hidden;
+}
+.banner-d .parallax-img { filter: brightness(0.6) saturate(1.1); }
+.banner-d-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 8%;
+}
+.banner-d-box {
+  background: rgba(250,250,250,0.94);
+  backdrop-filter: blur(12px);
+  padding: 3rem 3.5rem;
+  max-width: 420px;
+  border-top: 3px solid var(--black);
+}
+.banner-d-box .section-label { color: var(--g60); margin-bottom: 1.2rem; }
+.banner-d-box .section-label::before { background: var(--g20); }
+.banner-d-title {
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 1.2rem;
+}
+.banner-d-body {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--g60);
+  line-height: 1.85;
+  margin-bottom: 2rem;
+}
+
+/* IMAGE GRID */
+.img-grid { display: grid; grid-template-columns: repeat(3,1fr); background: var(--black); }
+.img-grid-item { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+.img-grid-item img { width: 100%; height: 120%; object-fit: cover; transition: transform 0.7s ease; display: block; }
+.img-grid-item:hover img { transform: scale(1.05); }
+.img-grid-label { position: absolute; bottom: 1.2rem; left: 1.4rem; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+.img-grid-2 { grid-template-columns: 1fr 1fr; }
+.img-grid-2 .img-grid-item { aspect-ratio: 16/9; }
+
+/* PROBLEMA */
 .problem-section { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; padding: 0; }
 .problem-col { padding: 7rem 7%; }
 .problem-col:first-child { border-right: 1px solid var(--g10); background: var(--g05); }
@@ -88,15 +296,6 @@ h2 { font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.1; lett
 .plist li::before { content: '×'; color: var(--g40); font-size: 0.78rem; flex-shrink: 0; margin-top: 3px; }
 .slist li::before { content: '→'; color: var(--black); }
 .slist li { color: var(--black); font-weight: 400; }
-
-/* IMAGE GRID between sections */
-.img-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; background: var(--black); }
-.img-grid-item { position: relative; overflow: hidden; aspect-ratio: 3/4; }
-.img-grid-item img { width: 100%; height: 120%; object-fit: cover; filter: grayscale(100%); transition: transform 0.6s ease; display: block; }
-.img-grid-item:hover img { transform: scale(1.04); }
-.img-grid-label { position: absolute; bottom: 1.2rem; left: 1.4rem; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-.img-grid-2 { grid-template-columns: 1fr 1fr; }
-.img-grid-2 .img-grid-item { aspect-ratio: 16/9; }
 
 /* PROCESO */
 .process-section { background: var(--white); }
@@ -121,15 +320,15 @@ h2 { font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.1; lett
 .diff-body strong { display: block; font-size: 0.87rem; font-weight: 500; color: var(--white); margin-bottom: 4px; }
 .diff-body span { font-size: 0.81rem; font-weight: 300; color: var(--g40); line-height: 1.75; }
 .diff-parallax { position: relative; overflow: hidden; min-height: 500px; }
-.diff-parallax .parallax-img { filter: grayscale(100%) brightness(0.3); }
-.diff-caption { position: absolute; bottom: 3rem; left: 3rem; right: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.diff-parallax .parallax-img { filter: brightness(0.55) saturate(0.9); }
+.diff-caption { position: absolute; bottom: 3rem; left: 3rem; right: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.12); }
 .diff-caption p { font-size: 1.2rem; font-weight: 300; color: var(--white); line-height: 1.55; letter-spacing: -0.01em; }
 
 /* TESTIMONIOS */
 .testi-section { background: var(--g05); }
 .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--g10); border-left: 1px solid var(--g10); margin-top: 3.5rem; }
 .testi-card { padding: 2.4rem 2rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); display: flex; flex-direction: column; gap: 1.4rem; background: var(--white); }
-.stars { display: flex; gap: 3px; margin-bottom: 2px; }
+.stars { display: flex; gap: 3px; }
 .star { width: 9px; height: 9px; background: var(--black); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
 .testi-q { font-size: 0.86rem; font-weight: 300; line-height: 1.88; color: var(--g60); flex: 1; }
 .testi-q::before { content: '"'; display: block; font-size: 2.5rem; font-weight: 300; color: var(--g20); line-height: 1; margin-bottom: 0.4rem; }
@@ -140,6 +339,7 @@ h2 { font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.1; lett
 /* ABOUT */
 .about-section { display: grid; grid-template-columns: 1fr 1fr; padding: 0; background: var(--white); }
 .about-parallax { overflow: hidden; min-height: 600px; position: relative; }
+.about-parallax .parallax-img { filter: grayscale(100%); }
 .about-content { padding: 8% 7%; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--g10); }
 .about-stats { display: grid; grid-template-columns: 1fr 1fr; margin: 2.5rem 0; border: 1px solid var(--g10); }
 .astat { padding: 1.4rem; border-right: 1px solid var(--g10); border-bottom: 1px solid var(--g10); }
@@ -227,12 +427,17 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
 
 /* RESPONSIVE */
 @media (max-width: 960px) {
-  .hero, .problem-section, .diff-section, .about-section, .contact-section { grid-template-columns: 1fr; }
-  .hero-parallax { min-height: 55vw; }
+  .hero, .problem-section, .diff-section, .about-section, .contact-section, .banner-c { grid-template-columns: 1fr; }
+  .hero-parallax, .diff-parallax, .about-parallax, .banner-c-img { min-height: 55vw; }
   .hero-right { display: block; }
-  .hero-content, .problem-col, .diff-content, .about-content, .contact-content, .contact-form-col { border: none; }
+  .hero-content, .diff-content, .about-content, .contact-content, .contact-form-col, .problem-col { border: none; }
   .problem-col:first-child { border-bottom: 1px solid var(--g10); }
-  .diff-parallax, .about-parallax { min-height: 320px; }
+  .banner-a { height: 60vh; }
+  .banner-b { height: 50vh; }
+  .banner-b-word { font-size: clamp(3rem, 12vw, 6rem); }
+  .banner-d { height: 60vh; }
+  .banner-d-content { justify-content: center; align-items: flex-end; padding-bottom: 3rem; }
+  .banner-d-box { max-width: 100%; }
   .process-header { grid-template-columns: 1fr; gap: 2rem; }
   .process-grid { grid-template-columns: 1fr 1fr; }
   .testi-grid { grid-template-columns: 1fr; border: none; }
@@ -247,10 +452,11 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
 }
 @media (max-width: 600px) {
   section { padding: 5rem 5%; }
-  .hero-content, .problem-col, .diff-content, .about-content, .contact-content, .contact-form-col { padding: 5rem 5%; }
+  .hero-content, .problem-col, .diff-content, .about-content, .contact-content, .contact-form-col, .banner-c-text { padding: 5rem 5%; }
   .process-grid { grid-template-columns: 1fr; }
   .img-grid { grid-template-columns: 1fr; }
-  .parallax-banner { height: 40vh; }
+  .banner-a { height: 70vh; }
+  .banner-a-content { padding: 5% 5% 8%; }
 }
 </style>
 </head>
@@ -324,19 +530,22 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
 </section>
 
-<!-- PARALLAX BANNER 1 -->
-<div class="parallax-banner parallax-wrap">
-  <img class="parallax-img" src="IMG/villa-catara.webp" alt="Villa Catara" data-parallax="0.4">
-  <div class="parallax-banner-content">
-    <p class="parallax-banner-text">Villa Catara — reforma integral y ampliación<br>Altea, Costa Blanca</p>
+<!-- ═══ BANNER A — Villa Catara, tipografía enorme ═══ -->
+<div class="banner-a parallax-wrap">
+  <img class="parallax-img" src="IMG/villa-catara.webp" alt="Villa Catara" data-parallax="0.45">
+  <div class="banner-a-overlay"></div>
+  <div class="banner-a-content">
+    <div class="banner-a-tag">Proyecto destacado · Villa Catara · Altea</div>
+    <h2 class="banner-a-title">Reforma<br><em>integral.</em><br>Hecha bien.</h2>
+    <p class="banner-a-sub">Redistribución completa con cálculo estructural propio, proyecto visado y dirección de obra desde el primer día.</p>
   </div>
 </div>
 
-<!-- IMAGEN GRID 3 proyectos -->
+<!-- IMAGE GRID 3 proyectos -->
 <div class="img-grid">
-  <div class="img-grid-item"><img src="IMG/roma-15.webp" alt="Roma 15" data-parallax="0.2"><span class="img-grid-label">Roma 15</span></div>
-  <div class="img-grid-item"><img src="IMG/costa-esmeralda.webp" alt="Costa Esmeralda" data-parallax="0.2"><span class="img-grid-label">Costa Esmeralda</span></div>
-  <div class="img-grid-item"><img src="IMG/casa-golf.webp" alt="Casa Golf" data-parallax="0.2"><span class="img-grid-label">Casa Golf</span></div>
+  <div class="img-grid-item"><img src="IMG/roma-15.webp" alt="Roma 15" data-parallax="0.15"><span class="img-grid-label">Roma 15</span></div>
+  <div class="img-grid-item"><img src="IMG/costa-esmeralda.webp" alt="Costa Esmeralda" data-parallax="0.15"><span class="img-grid-label">Costa Esmeralda</span></div>
+  <div class="img-grid-item"><img src="IMG/casa-golf.webp" alt="Casa Golf" data-parallax="0.15"><span class="img-grid-label">Casa Golf</span></div>
 </div>
 
 <!-- PROCESO -->
@@ -358,11 +567,14 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
 </section>
 
-<!-- PARALLAX BANNER 2 -->
-<div class="parallax-banner parallax-wrap">
-  <img class="parallax-img" src="IMG/reforma-02.webp" alt="Proceso de reforma" data-parallax="0.4">
-  <div class="parallax-banner-content">
-    <p class="parallax-banner-text">Cada reforma comienza con escucha.<br>Antes de dibujar una sola línea.</p>
+<!-- ═══ BANNER B — texto enorme mix-blend ═══ -->
+<div class="banner-b parallax-wrap">
+  <img class="parallax-img" src="IMG/reforma-02.webp" alt="Reforma" data-parallax="0.4">
+  <div class="banner-b-content">
+    <span class="banner-b-word">Sin</span>
+    <span class="banner-b-word">intermediarios.</span>
+    <span class="banner-b-word">Sin excusas.</span>
+    <p class="banner-b-caption">David Seguí Arquitectos · Altea · Costa Blanca</p>
   </div>
 </div>
 
@@ -384,10 +596,23 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
 </section>
 
-<!-- IMAGEN GRID 2 proyectos -->
+<!-- ═══ BANNER C — split foto / texto oscuro ═══ -->
+<div class="banner-c">
+  <div class="banner-c-img parallax-wrap">
+    <img class="parallax-img" src="IMG/mascarat.webp" alt="Centro Bienestar Mascarat" data-parallax="0.3">
+  </div>
+  <div class="banner-c-text">
+    <div class="banner-c-tag">Centro Bienestar Mascarat</div>
+    <div class="banner-c-num">20+</div>
+    <h3 class="banner-c-title">Años diseñando<br>espacios que<br>funcionan.</h3>
+    <p class="banner-c-desc">Cada proyecto que aceptamos lo abordamos con el mismo rigor técnico, independientemente del presupuesto. Si lo firmamos, respondemos.</p>
+  </div>
+</div>
+
+<!-- IMAGE GRID 2 proyectos -->
 <div class="img-grid img-grid-2">
-  <div class="img-grid-item"><img src="IMG/mascarat.webp" alt="Centro bienestar Mascarat" data-parallax="0.2"><span class="img-grid-label">Centro Bienestar Mascarat</span></div>
-  <div class="img-grid-item"><img src="IMG/reforma-altea.webp" alt="Reforma Altea" data-parallax="0.2"><span class="img-grid-label">Reforma integral Altea</span></div>
+  <div class="img-grid-item"><img src="IMG/roma-21.webp" alt="Roma 21" data-parallax="0.15"><span class="img-grid-label">Roma 21</span></div>
+  <div class="img-grid-item"><img src="IMG/reforma-altea.webp" alt="Reforma Altea" data-parallax="0.15"><span class="img-grid-label">Reforma integral Altea</span></div>
 </div>
 
 <!-- TESTIMONIOS -->
@@ -413,18 +638,23 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
   </div>
 </section>
 
-<!-- PARALLAX BANNER 3 -->
-<div class="parallax-banner parallax-wrap">
-  <img class="parallax-img" src="IMG/roma-21.webp" alt="Roma 21" data-parallax="0.4">
-  <div class="parallax-banner-content">
-    <p class="parallax-banner-text">Roma 21 — redistribución completa<br>con refuerzo estructural y licencia mayor</p>
+<!-- ═══ BANNER D — imagen full + caja flotante blanca ═══ -->
+<div class="banner-d parallax-wrap">
+  <img class="parallax-img" src="IMG/villa-4b.jpg" alt="Villa 4B" data-parallax="0.4">
+  <div class="banner-d-content">
+    <div class="banner-d-box">
+      <div class="section-label">Villa 4B · Ampliación</div>
+      <h3 class="banner-d-title">Ampliar sin<br>permisos cuesta<br>más caro.</h3>
+      <p class="banner-d-body">Toda ampliación requiere proyecto arquitectónico, licencia de obra mayor y dirección facultativa. Nosotros lo gestionamos todo — tú solo decides.</p>
+      <a href="#contacto" class="btn-black">Consultar mi proyecto</a>
+    </div>
   </div>
 </div>
 
 <!-- SOBRE NOSOTROS -->
 <section class="about-section" style="padding:0">
   <div class="about-parallax parallax-wrap">
-    <img class="parallax-img" src="IMG/reforma-03.webp" alt="Estudio David Seguí Arquitectos" data-parallax="0.3">
+    <img class="parallax-img" src="IMG/reforma-03.webp" alt="Estudio David Seguí" data-parallax="0.3">
   </div>
   <div class="about-content">
     <div class="section-label fi">El estudio</div>
@@ -485,22 +715,14 @@ footer { background: var(--black); padding: 2.4rem 8%; display: flex; align-item
       <a href="#contacto" class="btn-outline" style="margin-top:2rem;display:inline-block">Hacer una consulta</a>
     </div>
     <div class="faq-list fi">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿En qué se diferencia contratar un arquitecto de contratar directamente a una constructora?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Una constructora ejecuta, pero no proyecta ni asume responsabilidad técnica legal. Nosotros elaboramos el proyecto completo, tramitamos la licencia municipal y dirigimos la obra. Si hay un problema estructural durante la ejecución, el responsable legal somos nosotros. Una constructora no puede decir lo mismo.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿En qué se diferencia contratar un arquitecto de contratar directamente a una constructora?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Una constructora ejecuta, pero no proyecta ni asume responsabilidad técnica legal. Nosotros elaboramos el proyecto completo, tramitamos la licencia municipal y dirigimos la obra. Si hay un problema estructural durante la ejecución, el responsable legal somos nosotros.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Mi reforma necesita arquitecto obligatoriamente?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Legalmente sí, cuando implica modificación de estructura portante, redistribución con cambio de instalaciones generales, ampliación de superficie, cambio de uso o intervención en fachada. Si solo necesitas cambiar suelos o pintar sin tocar instalaciones, probablemente no necesites nuestro servicio.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda en obtenerse la licencia de obra mayor en Altea?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>En Altea y municipios de la Marina Baixa, entre 2 y 6 meses desde la presentación del proyecto. Nosotros hacemos el seguimiento completo sin que tengas que intervenir.</p></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hacéis obra "llave en mano"?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Nuestro servicio es proyecto + dirección de obra. La ejecución puede realizarse con una constructora de nuestra recomendación o con la que elija el cliente, siempre que acepte trabajar bajo nuestra dirección facultativa. En cualquier caso, somos el responsable técnico hasta la entrega final.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Hacéis obra "llave en mano"?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Nuestro servicio es proyecto + dirección de obra. La ejecución puede realizarse con una constructora de nuestra recomendación o con la que elija el cliente, siempre que acepte trabajar bajo nuestra dirección facultativa.</p></div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Trabajáis solo en Altea o también en otros municipios?<span class="faq-arrow">+</span></button><div class="faq-ans"><p>Tenemos estudio en Altea pero trabajamos en toda la Marina Baixa y Marina Alta: Calpe, Moraira, Dénia, Alfaz del Pi, Benidorm y municipios colindantes.</p></div></div>
     </div>
   </div>
 </section>
-
-<!-- PARALLAX BANNER 4 -->
-<div class="parallax-banner parallax-wrap">
-  <img class="parallax-img" src="IMG/villa-4b.jpg" alt="Villa 4B" data-parallax="0.4">
-  <div class="parallax-banner-content">
-    <p class="parallax-banner-text">Villa 4B — ampliación y redistribución<br>con proyecto visado y dirección de obra completa</p>
-  </div>
-</div>
 
 <!-- CONTACTO -->
 <section class="contact-section" id="contacto" style="padding:0">
@@ -561,7 +783,7 @@ function updateParallax() {
     const wh = window.innerHeight;
     if (rect.bottom < 0 || rect.top > wh) return;
     const progress = (wh - rect.top) / (wh + rect.height);
-    const shift = (progress - 0.5) * factor * 100;
+    const shift = (progress - 0.5) * factor * 160;
     img.style.transform = `translateY(${shift}px)`;
   });
 }
@@ -569,16 +791,24 @@ window.addEventListener('scroll', updateParallax, { passive: true });
 window.addEventListener('resize', updateParallax);
 updateParallax();
 
-// FADE IN
+// FADE IN + BANNER B TRIGGER
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('on'), i * 65);
+      if (e.target.classList.contains('fi')) {
+        setTimeout(() => e.target.classList.add('on'), i * 65);
+      }
+      if (e.target.classList.contains('banner-b')) {
+        e.target.querySelectorAll('.banner-b-word, .banner-b-caption').forEach((el, j) => {
+          setTimeout(() => el.classList.add('visible'), j * 120);
+        });
+      }
       obs.unobserve(e.target);
     }
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fi, .banner-b').forEach(el => obs.observe(el));
 
 // FAQ
 function toggleFaq(btn) {
