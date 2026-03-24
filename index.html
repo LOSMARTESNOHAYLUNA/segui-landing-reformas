@@ -642,7 +642,7 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
       <strong>Proyectos desde 300.000€</strong>
       <p>Es donde nuestra metodología aporta valor real. Si tu proyecto está en ese rango o por encima, queremos conocerlo.</p>
     </div>
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="c76ae81c-ce09-4e1b-9e87-914fd9747fcb">
       <input type="hidden" name="redirect" value="https://davidseguiarquitectos.com/gracias/">
       <input type="hidden" name="subject" value="Nueva solicitud de reunión — David Seguí Arquitectos">
@@ -715,4 +715,31 @@ function faq(btn) {
   const open = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
   if (!open) item.classList.add('open');
+}
+
+// FORMULARIO — envío via fetch + redirect manual
+const form = document.getElementById('contactForm');
+if (form) {
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-enviar');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form)
+      });
+      const data = await res.json();
+      if (data.success) {
+        window.location.href = 'https://davidseguiarquitectos.com/gracias/';
+      } else {
+        btn.textContent = 'Error al enviar. Llámanos directamente.';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Error al enviar. Llámanos directamente.';
+      btn.disabled = false;
+    }
+  });
 }
