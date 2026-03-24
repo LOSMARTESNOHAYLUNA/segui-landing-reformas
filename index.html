@@ -351,9 +351,7 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 .wa:hover { transform: translateY(-2px); }
 .wa svg { width: 22px; height: 22px; fill: var(--black); }
 
-/* ─── FADE IN ─── */
-.fi { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
-.fi.on { opacity: 1; transform: translateY(0); }
+/* animaciones suaves al hacer scroll — solo palabras del banner */
 /* Palabras animadas en foto-b */
 .palabra { display: block; opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .palabra.on { opacity: 1; transform: translateY(0); }
@@ -468,7 +466,7 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 
 <!-- PROCESO -->
 <section>
-  <div class="process-header fi">
+  <div class="process-header">
     <div>
       <div class="lbl">Metodología</div>
       <h2>De la primera visita<br>a la entrega final.</h2>
@@ -476,12 +474,12 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
     <p>Trabajamos con una metodología de estudio de arquitectura, no de contratista. Cada fase tiene un responsable claro, documentación asociada y validación antes de avanzar.</p>
   </div>
   <div class="process-grid">
-    <div class="paso fi"><div class="paso-num">Fase 01</div><div class="paso-titulo">Escucha y diagnóstico</div><p class="paso-desc">Reunión inicial, cuestionario de necesidades y visita técnica. Levantamiento de planos y diagnóstico de patologías estructurales. Empezamos entendiendo tu proyecto de vida, no solo las paredes.</p></div>
-    <div class="paso fi"><div class="paso-num">Fase 02</div><div class="paso-titulo">Anteproyecto y viabilidad</div><p class="paso-desc">Propuesta de redistribución, soluciones técnicas preliminares y presupuesto orientativo con mediciones reales. Defines si seguimos adelante con criterio, no con incertidumbre.</p></div>
-    <div class="paso fi"><div class="paso-num">Fase 03</div><div class="paso-titulo">Proyecto ejecutivo</div><p class="paso-desc">Proyecto completo conforme al CTE: planos, memoria, mediciones, especificaciones técnicas. Cálculo estructural propio. Eficiencia energética integrada.</p></div>
-    <div class="paso fi"><div class="paso-num">Fase 04</div><div class="paso-titulo">Licencia municipal</div><p class="paso-desc">Presentación ante el ayuntamiento, gestión de tasas y seguimiento hasta obtención de licencia. No tienes que poner un pie en el ayuntamiento.</p></div>
-    <div class="paso fi"><div class="paso-num">Fase 05</div><div class="paso-titulo">Dirección de obra</div><p class="paso-desc">Control técnico de ejecución, supervisión de calidad y coordinación de seguridad. Somos el responsable técnico legal ante cualquier incidencia.</p></div>
-    <div class="paso fi"><div class="paso-num">Fase 06</div><div class="paso-titulo">Entrega y legalización</div><p class="paso-desc">Acta de verificación de acabados, certificado final de obra y gestiones administrativas. El inmueble queda completamente legalizado.</p></div>
+    <div class="paso"><div class="paso-num">Fase 01</div><div class="paso-titulo">Escucha y diagnóstico</div><p class="paso-desc">Reunión inicial, cuestionario de necesidades y visita técnica. Levantamiento de planos y diagnóstico de patologías estructurales. Empezamos entendiendo tu proyecto de vida, no solo las paredes.</p></div>
+    <div class="paso"><div class="paso-num">Fase 02</div><div class="paso-titulo">Anteproyecto y viabilidad</div><p class="paso-desc">Propuesta de redistribución, soluciones técnicas preliminares y presupuesto orientativo con mediciones reales. Defines si seguimos adelante con criterio, no con incertidumbre.</p></div>
+    <div class="paso"><div class="paso-num">Fase 03</div><div class="paso-titulo">Proyecto ejecutivo</div><p class="paso-desc">Proyecto completo conforme al CTE: planos, memoria, mediciones, especificaciones técnicas. Cálculo estructural propio. Eficiencia energética integrada.</p></div>
+    <div class="paso"><div class="paso-num">Fase 04</div><div class="paso-titulo">Licencia municipal</div><p class="paso-desc">Presentación ante el ayuntamiento, gestión de tasas y seguimiento hasta obtención de licencia. No tienes que poner un pie en el ayuntamiento.</p></div>
+    <div class="paso"><div class="paso-num">Fase 05</div><div class="paso-titulo">Dirección de obra</div><p class="paso-desc">Control técnico de ejecución, supervisión de calidad y coordinación de seguridad. Somos el responsable técnico legal ante cualquier incidencia.</p></div>
+    <div class="paso"><div class="paso-num">Fase 06</div><div class="paso-titulo">Entrega y legalización</div><p class="paso-desc">Acta de verificación de acabados, certificado final de obra y gestiones administrativas. El inmueble queda completamente legalizado.</p></div>
   </div>
 </section>
 
@@ -497,7 +495,7 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 
 <!-- DIFERENCIADORES -->
 <div class="diff-wrap">
-  <div class="diff-text fi">
+  <div class="diff-text">
     <div class="lbl">Por qué elegirnos</div>
     <h2>Formación técnica<br>que lo cambia todo.</h2>
     <ul class="diff-lista">
@@ -525,20 +523,20 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 
 <!-- TESTIMONIOS -->
 <section class="testi-wrap">
-  <div class="lbl fi">Clientes</div>
+  <div class="lbl">Clientes</div>
   <h2 class="fi">Lo que dicen quienes<br>ya han pasado por esto.</h2>
   <div class="testi-grid">
-    <div class="testi-card fi">
+    <div class="testi-card">
       <div class="estrellas"><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div></div>
       <p class="testi-q">Compramos una villa en Altea con la intención de reformarla completamente. David nos explicó desde el primer día qué era posible, qué no, y por qué. La obra terminó con dos semanas de retraso sobre lo previsto — y nos avisaron con antelación.</p>
       <div class="testi-meta"><div class="testi-nombre">Marc & Elisabet T.</div><div class="testi-detalle">Villa unifamiliar · Altea · 420.000€ · 2024</div></div>
     </div>
-    <div class="testi-card fi">
+    <div class="testi-card">
       <div class="estrellas"><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div></div>
       <p class="testi-q">Teníamos un apartamento con la estructura comprometida. Otros estudios nos decían que no había problema. David lo diagnosticó correctamente, ejecutó el refuerzo con cálculo propio y ahora el piso está legalizado y en venta.</p>
       <div class="testi-meta"><div class="testi-nombre">Andrés M.</div><div class="testi-detalle">Reforma estructural · Calpe · 310.000€ · 2023</div></div>
     </div>
-    <div class="testi-card fi">
+    <div class="testi-card">
       <div class="estrellas"><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div><div class="estrella"></div></div>
       <p class="testi-q">El proceso de escucha al inicio fue sorprendente — nos hicieron preguntas que nosotros mismos no nos habíamos hecho. El resultado supera lo que teníamos en mente. La carpeta compartida fue un salvavidas durante los 11 meses de obra.</p>
       <div class="testi-meta"><div class="testi-nombre">Karin & Thomas B.</div><div class="testi-detalle">Reforma integral · Moraira · 560.000€ · 2024</div></div>
@@ -548,7 +546,7 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 
 <!-- FOTO D — texto izquierda + foto Roma 15 derecha -->
 <div class="foto-d">
-  <div class="foto-d-text fi">
+  <div class="foto-d-text">
     <div class="lbl">Ampliación sin licencia cuesta más caro</div>
     <h3 class="foto-d-titulo">Toda obra requiere<br>proyecto y dirección<br>facultativa.</h3>
     <p class="foto-d-body">Nosotros gestionamos el proyecto completo, la licencia municipal y dirigimos la obra desde el primer día. Tú solo decides.</p>
@@ -561,9 +559,9 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 <div class="about-wrap">
   <div class="about-foto bg-photo" style="background-image: url('IMG/mascarat.webp')"></div>
   <div class="about-texto">
-    <div class="lbl fi">El estudio</div>
+    <div class="lbl">El estudio</div>
     <h2 class="fi">+20 años en<br>Costa Blanca.</h2>
-    <div class="about-stats fi">
+    <div class="about-stats">
       <div class="astat"><div class="astat-num">+20</div><div class="astat-lbl">Años de experiencia</div></div>
       <div class="astat"><div class="astat-num">100%</div><div class="astat-lbl">Obras con licencia</div></div>
       <div class="astat"><div class="astat-num">3</div><div class="astat-lbl">Titulaciones en equipo</div></div>
@@ -571,15 +569,15 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
     </div>
     <p class="fi">Somos un estudio especializado en reformas integrales de alta exigencia técnica en Altea y toda la Costa Blanca. Nuestra formación multidisciplinar nos permite asumir el control total de cada proyecto sin delegar las fases que más importan.</p>
     <p class="fi">No somos un estudio generalista. Si tu proyecto encaja en nuestro perfil, trabajaremos en él como si fuera nuestro.</p>
-    <a href="#contacto" class="btn-negro fi" style="margin-top:2.5rem;display:inline-block">Presentarnos tu proyecto</a>
+    <a href="#contacto" class="btn-negro" style="margin-top:2.5rem;display:inline-block">Presentarnos tu proyecto</a>
   </div>
 </div>
 
 <!-- ¿SOMOS LO QUE NECESITAS? -->
 <section style="background: var(--g05)">
-  <div class="lbl fi">¿Somos lo que necesitas?</div>
+  <div class="lbl">¿Somos lo que necesitas?</div>
   <h2 class="fi">Trabajamos con clientes<br>que valoran lo correcto.</h2>
-  <div class="fit-grid fi">
+  <div class="fit-grid">
     <div class="fit-col si">
       <div class="fit-tit">Sí, si buscas esto</div>
       <ul class="fit-lista">
@@ -603,7 +601,7 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
       </ul>
     </div>
   </div>
-  <div class="fit-nota fi">
+  <div class="fit-nota">
     <p><strong>Sobre la inversión mínima</strong>Nuestros proyectos de reforma integral son rentables a partir de 300.000€ de inversión total. Si tu proyecto está en ese rango o por encima, nuestra dedicación y rigor técnico tienen pleno sentido económico para ti.</p>
   </div>
 </section>
@@ -611,13 +609,13 @@ footer { background: var(--black); padding: 2.5rem 8%; display: flex; align-item
 <!-- FAQ -->
 <section>
   <div class="faq-wrap">
-    <div class="faq-intro fi">
+    <div class="faq-intro">
       <div class="lbl">Preguntas frecuentes</div>
       <h2>Lo que nos preguntan antes de contactar.</h2>
       <p>Estas son las dudas más habituales. Si la tuya no está aquí, en la primera reunión la resolvemos.</p>
       <a href="#contacto" class="btn-linea" style="margin-top:2rem;display:inline-block">Hacer una consulta</a>
     </div>
-    <div class="faq-lista fi">
+    <div class="faq-lista">
       <div class="faq-item"><button class="faq-preg" onclick="faq(this)">¿En qué se diferencia contratar un arquitecto de contratar directamente a una constructora?<span class="faq-ico">+</span></button><div class="faq-resp"><p>Una constructora ejecuta, pero no proyecta ni asume responsabilidad técnica legal. Nosotros elaboramos el proyecto completo, tramitamos la licencia y dirigimos la obra. Si hay un problema estructural, el responsable legal somos nosotros.</p></div></div>
       <div class="faq-item"><button class="faq-preg" onclick="faq(this)">¿Mi reforma necesita arquitecto obligatoriamente?<span class="faq-ico">+</span></button><div class="faq-resp"><p>Legalmente sí, cuando implica modificación de estructura portante, redistribución con cambio de instalaciones, ampliación de superficie, cambio de uso o intervención en fachada. Para pintar o cambiar suelos sin tocar instalaciones, probablemente no nos necesitas.</p></div></div>
       <div class="faq-item"><button class="faq-preg" onclick="faq(this)">¿Cuánto tarda en obtenerse la licencia de obra mayor en Altea?<span class="faq-ico">+</span></button><div class="faq-resp"><p>En Altea y municipios de la Marina Baixa, entre 2 y 6 meses desde la presentación del proyecto. Nosotros hacemos el seguimiento completo sin que tengas que intervenir.</p></div></div>
@@ -686,26 +684,23 @@ function checkNav() { nav.classList.toggle('solid', window.scrollY > 60); }
 window.addEventListener('scroll', checkNav, { passive: true });
 checkNav();
 
-// FADE IN + CINE
+// Animación palabras banner
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    if (e.target.classList.contains('fi')) e.target.classList.add('on');
     if (e.target.hasAttribute('data-cine')) {
       e.target.querySelectorAll('.palabra').forEach((p, i) => {
         setTimeout(() => p.classList.add('on'), i * 140);
       });
-      setTimeout(() => { const s = e.target.querySelector('.foto-b-sub'); if(s) s.style.opacity = 1; }, 600);
+      setTimeout(() => {
+        const s = e.target.querySelector('.foto-b-sub');
+        if (s) s.style.opacity = 1;
+      }, 600);
     }
     obs.unobserve(e.target);
   });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fi, [data-cine]').forEach(el => obs.observe(el));
-
-// Fallback: si el observer falla, mostrar todo al cabo de 1.5s
-setTimeout(() => {
-  document.querySelectorAll('.fi').forEach(el => el.classList.add('on'));
-}, 1500);
+}, { threshold: 0.15 });
+document.querySelectorAll('[data-cine]').forEach(el => obs.observe(el));
 
 // FAQ
 function faq(btn) {
