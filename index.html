@@ -821,10 +821,22 @@ function closeMenu() { document.getElementById('mobileMenu').classList.remove('o
 // COOKIES
 function acceptCookies() { localStorage.setItem('cookies','accepted'); hideCookieBanner(); }
 function rejectCookies() { localStorage.setItem('cookies','rejected'); hideCookieBanner(); }
-function hideCookieBanner() { document.getElementById('cookieBanner').style.display='none'; document.getElementById('cookieWidget').classList.add('visible'); }
-function showCookieBanner() { document.getElementById('cookieBanner').style.display='flex'; document.getElementById('cookieWidget').classList.remove('visible'); }
-document.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('cookies')) { hideCookieBanner(); }
+function hideCookieBanner() {
+  var b = document.getElementById('cookieBanner');
+  var w = document.getElementById('cookieWidget');
+  if (b) b.style.display = 'none';
+  if (w) w.classList.add('visible');
+}
+function showCookieBanner() {
+  var b = document.getElementById('cookieBanner');
+  var w = document.getElementById('cookieWidget');
+  if (b) b.style.display = 'flex';
+  if (w) w.classList.remove('visible');
+}
+window.addEventListener('load', function() {
+  if (localStorage.getItem('cookies')) {
+    hideCookieBanner();
+  }
 });
 
 // NAV
