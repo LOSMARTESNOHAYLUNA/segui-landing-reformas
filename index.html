@@ -823,7 +823,9 @@ function acceptCookies() { localStorage.setItem('cookies','accepted'); hideCooki
 function rejectCookies() { localStorage.setItem('cookies','rejected'); hideCookieBanner(); }
 function hideCookieBanner() { document.getElementById('cookieBanner').style.display='none'; document.getElementById('cookieWidget').classList.add('visible'); }
 function showCookieBanner() { document.getElementById('cookieBanner').style.display='flex'; document.getElementById('cookieWidget').classList.remove('visible'); }
-if (localStorage.getItem('cookies')) { hideCookieBanner(); }
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('cookies')) { hideCookieBanner(); }
+});
 
 // NAV
 const nav = document.getElementById('nav');
@@ -883,6 +885,7 @@ if (form) {
     }
   });
 }
+</script>
 
 <!-- COOKIES RGPD -->
 <div class="cookie-banner" id="cookieBanner">
